@@ -70,7 +70,7 @@ let session;
 
 const db = mysql.createConnection({
   user: "root",
-  host: "localhost",
+  host: "0.0.0.0",
   password: "password",
   database: "General_courses",
 });
