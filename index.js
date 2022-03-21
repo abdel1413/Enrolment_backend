@@ -218,9 +218,6 @@ app.post("/register", (req, res) => {
 
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
-      // hashb = hash;
-      console.log("inside bcrypt ", hash);
-      //
       register.beginTransaction(function (err) {
         if (err) {
           throw err;
@@ -304,8 +301,6 @@ app.post("/signin", (req, res) => {
   console.log(req.body);
   let emailValue = req.body.email;
   let userPassword = req.body.password;
-  console.log("email", emailValue);
-  console.log("pass", userPassword);
 
   register.query(
     "SELECT * FROM Registration.login WHERE email=?",
@@ -315,17 +310,14 @@ app.post("/signin", (req, res) => {
         console.log(error);
       }
       if (result.length > 0) {
-        console.log("result", result.length);
         // console.log("userPassword ", userPassword);
         // console.log("resulthash ", result[0].hash);
 
         return bcrypt.compare(userPassword, result[0].hash, (e, response) => {
-          console.log("response", response);
           if (response) {
             session = req.session;
             req.session.user = req.body.email;
 
-            console.log("session created", req.session.user);
             // res.status(200).send(result[0].email);
             //res.status(200).send(` <a href=\'/logout'>click to logout</a>`);
             //res.redirect("/");
@@ -345,7 +337,6 @@ app.post("/signin", (req, res) => {
           }
         });
       } else {
-        console.log("user doen't exist");
         return res.status(404).json("User doesn't exist");
       }
     }
