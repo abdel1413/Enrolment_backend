@@ -397,6 +397,6 @@ app.get("http://localhost/logout", (req, res) => {
 //   // }
 // });
 
-app.listen(3001, () => {
-  console.log("we are runnig on port 3001");
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`we are runnig on port ${process.env.PORT}`);
 });
