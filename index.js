@@ -400,5 +400,5 @@ app.get("http://localhost/logout", (req, res) => {
 const PORT = process.env.PORT || 3001;
 const host = "0.0.0.0";
 app.listen(PORT, () => {
-  console.log(`we are runnig on port ${process.env.PORT}`);
+  console.log(`we are runnig on port ${PORT}`);
 });
