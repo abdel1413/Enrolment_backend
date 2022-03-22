@@ -52,17 +52,17 @@ app.use(cookiParser());
 // app.use(express.urlencoded({extended: false}));
 // app.use(express.json());
 
-const oneDay = 1000 * 60 * 60 * 24;
-app.use(
-  sessions({
-    key: "userId",
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    name: "uniqueSessionID",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: oneDay },
-  })
-);
+// const oneDay = 1000 * 60 * 60 * 24;
+// app.use(
+//   sessions({
+//     key: "userId",
+//     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+//     name: "uniqueSessionID",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: oneDay },
+//   })
+// );
 
 let session;
 
