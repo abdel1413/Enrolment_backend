@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon Back_end/index.js"
+    "start": "Back_end/index.js"
   },
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
