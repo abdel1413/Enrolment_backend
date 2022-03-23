@@ -387,8 +387,11 @@ app.get("http://localhost/logout", (req, res) => {
 //   //   res.status(401).send("Invalid User or password");
 //   // }
 // });
+const port = process.env.PORT;
+if (port === null || port === "") {
+  port = 3001;
+}
 
-const host = "0.0.0.0";
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`we are runnig on port ${process.env.PORT || 3001}`);
+app.listen(port, () => {
+  console.log(`we are runnig on port ${port}`);
 });
