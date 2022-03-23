@@ -24,6 +24,8 @@ const bodyParser = require("body-parser");
 //cors(corsOptions);
 app.use(cors()); //allows to connect outside api (Access-Control-Allow-Origin)
 
+const PORT = process.env.PORT || 3001;
+
 // app.use((req, res, next) => {
 //   res.setHeader({ "Access-Control-Allow-Credentials": true });
 //   res.header("Access-Control-Allow-Credentials", true);
@@ -388,7 +390,6 @@ app.get("http://localhost/logout", (req, res) => {
 //   // }
 // });
 
-const PORT = process.env.PORT || 3001;
 const host = "0.0.0.0";
 app.listen(PORT, () => {
   console.log(`we are runnig on port ${PORT}`);
