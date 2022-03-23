@@ -316,7 +316,7 @@ app.post("/signin", (req, res) => {
         return bcrypt.compare(userPassword, result[0].hash, (e, response) => {
           if (response) {
             session = req.session;
-            req.session.user = req.body.email;
+            // req.session.user = emailValue;
 
             // res.status(200).send(result[0].email);
             //res.status(200).send(` <a href=\'/logout'>click to logout</a>`);
@@ -326,7 +326,7 @@ app.post("/signin", (req, res) => {
             //   .status(200)
             //   .send(`${result} <a href=\'/logout'>click to logout</a>`);
 
-            res.json({ username: req.session.user, logged: true });
+            res.json({ username: emailValue, logged: true });
             //res.redirect(/);
           } else {
             res.json({ logged: false });
