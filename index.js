@@ -316,6 +316,7 @@ app.post("/signin", (req, res) => {
         return bcrypt.compare(userPassword, result[0].hash, (e, response) => {
           if (response) {
             session = req.session;
+            
             // req.session.user = emailValue;
 
             // res.status(200).send(result[0].email);
@@ -336,6 +337,7 @@ app.post("/signin", (req, res) => {
             //  .send("wrong user email/password combination!");
           }
         });
+
       } else {
         return res.status(404).json("User doesn't exist");
       }
@@ -387,6 +389,7 @@ app.get("http://localhost/logout", (req, res) => {
 //   //   res.status(401).send("Invalid User or password");
 //   // }
 // });
+
 const port = process.env.PORT || 3001;
 
 // if (port === null || port === "") {
