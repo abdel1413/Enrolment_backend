@@ -213,8 +213,6 @@ app.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   // const { firstName, lastName, email, password } = req.body;
-  console.log("more here ", req.body.email);
-  console.log("password ", password);
 
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
@@ -244,7 +242,6 @@ app.post("/register", (req, res) => {
                     throw err;
                   });
                 } else {
-                  console.log("inside query", hash);
                   console.log(result);
                 }
 
@@ -286,7 +283,6 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/signin", (req, res) => {
-  console.log("session out", req.session);
   session = req.session.user;
   if (req.session) {
     res.send({ loggedIn: true, user: req.session.user });
@@ -298,7 +294,6 @@ app.get("/signin", (req, res) => {
 
 //signin  -->use post (success or fail
 app.post("/signin", (req, res) => {
-  console.log(req.body);
   let emailValue = req.body.email;
   let userPassword = req.body.password;
 
@@ -316,7 +311,7 @@ app.post("/signin", (req, res) => {
         return bcrypt.compare(userPassword, result[0].hash, (e, response) => {
           if (response) {
             session = req.session;
-            
+
             // req.session.user = emailValue;
 
             // res.status(200).send(result[0].email);
@@ -337,7 +332,6 @@ app.post("/signin", (req, res) => {
             //  .send("wrong user email/password combination!");
           }
         });
-
       } else {
         return res.status(404).json("User doesn't exist");
       }
