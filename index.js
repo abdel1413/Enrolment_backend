@@ -6,6 +6,7 @@ const sessions = require("express-session");
 const cookiParser = require("cookie-parser");
 const mysql = require("mysql"); //call mysql lib
 const mysql2 = require("mysql");
+const mysql3 = require("mysql");
 const registerdb = require("mysql");
 const bodyParser = require("body-parser");
 
@@ -67,7 +68,6 @@ app.use(cookiParser());
 let session;
 
 //create a connection with dababase
-
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
@@ -84,8 +84,15 @@ const db2 = mysql2.createConnection({
 });
 db2.connect();
 
-//connect the register db
+const db3 = mysql3.createConnection({
+  user: "root",
+  host: "localhost",
+  password: "password",
+  database: "Registration",
+});
+db3.connect();
 
+//connect the register db
 const register = registerdb.createConnection({
   user: "root",
   host: "localhost",
@@ -138,6 +145,16 @@ app.get("/advancedcourses", (req, res) => {
   db2.query("SELECT * FROM Adv_CMPs", (error, result) => {
     if (error) {
       console.log(error);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get("/showuser", (req, res) => {
+  db3.query("SELECT email FROM login", (err, result) => {
+    if (err) {
+      console.log(err);
     } else {
       res.send(result);
     }
@@ -296,6 +313,7 @@ app.get("/signin", (req, res) => {
 app.post("/signin", (req, res) => {
   let emailValue = req.body.email;
   let userPassword = req.body.password;
+  console.log("backend", emailValue);
 
   register.query(
     "SELECT * FROM Registration.login WHERE email=?",
@@ -305,9 +323,6 @@ app.post("/signin", (req, res) => {
         console.log(error);
       }
       if (result.length > 0) {
-        // console.log("userPassword ", userPassword);
-        // console.log("resulthash ", result[0].hash);
-
         return bcrypt.compare(userPassword, result[0].hash, (e, response) => {
           if (response) {
             session = req.session;
